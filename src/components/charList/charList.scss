@@ -1,0 +1,92 @@
+@import '../../style/variables.scss';
+
+.char {
+    &__content {
+        margin-top: 50px;
+        display: grid;
+        grid-template-columns: calc(250px + (700 - 250) * ((100vw - 320px) / (1600 - 320))) calc(50px + (100 - 50) * ((100vw - 320px) / (1200 - 320)));
+        column-gap: 25px;
+        align-items: start;
+        justify-content: space-around;
+
+        @media (max-width: 1600px) {
+            & {
+                display: flex;
+                justify-content: center;
+            }
+        }
+
+        @media (max-width: 1200px) {
+            & {
+                display: flex;
+                justify-content: center;
+            }
+        }
+
+        @media (min-width: 1600px) {
+            & {
+                display: flex;
+                justify-content: center;
+                gap: calc(50px + (200 - 50) * ((100vw - 320px) / (1600 - 320)));
+            }
+        }
+    }
+
+    &__grid {
+        display: grid;
+        justify-content: center;
+        width: calc(250px + (500 - 250) * ((100vw - 320px) / (1600 - 320)));
+        grid-template-columns: repeat(3, 200px);
+        column-gap: calc(25px + (60 - 25) * ((100vw - 320px) / (1600 - 320)));
+        ;
+        row-gap: calc(30px + (45 - 30) * ((100vw - 320px) / (1600 - 320)));
+        ;
+    }
+
+    &__item {
+        position: relative;
+        padding: 0 0px 58% 0px;
+        width: calc(180px + (230 - 180) * ((100vw - 320px) / (1600 - 320)));
+        height: calc(250px + (300 - 250) * ((100vw - 320px) / (1600 - 320)));
+        background-color: $dark;
+        box-shadow: 5px 5px 10px rgba(0, 0, 0, .25);
+        cursor: pointer;
+        transition: 0.3s transform;
+
+        @media (max-width: 1200px) {
+            & {
+                width: 200px;
+            }
+        }
+
+        img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transform: translate(-15px, -15px);
+        }
+
+        // &_selected {
+        //     box-shadow: 0 5px 20px $main-color;
+        //     transform: translateY(-8px);
+        // }
+        &:hover {
+            transition: all 0.5s ease-out;
+            box-shadow: 0 5px 20px $main-color;
+            transform: translateY(-10px);
+        }
+    }
+
+    &__name {
+        position: absolute;
+        z-index: 20;
+        font-weight: bold;
+        font-size: 22px;
+        line-height: 29px;
+        text-transform: uppercase;
+        color: #fff;
+    }
+}

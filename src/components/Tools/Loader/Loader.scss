@@ -1,0 +1,23 @@
+@import '../../../style/variables.scss';
+.Loader {
+    display: flex;
+    justify-self: center;
+    align-self: center;
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    animation: identifier 1s linear;
+    background-size:100% 100%;
+    background-image: url(https://i.etsystatic.com/14742401/r/il/7223c2/1213383541/il_1588xN.1213383541_bj84.jpg);
+}
+@keyframes identifier {
+    from {
+        transform: rotate(0deg);
+        scale: 1;
+    }
+
+    to {
+        transform: rotate(720deg);
+        scale: 1.4;
+    }
+}

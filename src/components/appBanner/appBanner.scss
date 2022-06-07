@@ -1,0 +1,19 @@
+@import '../../style/variables.scss';
+.app {
+    &__banner {
+        width: 100%;
+        background-color: $dark;
+        height: calc(50px + (100 - 50) * ((100vw - 320px) / (1200 - 320)));
+        padding: 0 25px 0 45px;
+        display: grid;
+        grid-template-columns: 152px auto 133px;
+        &-text {
+            font-weight: bold;
+            font-size: calc(15px + (24 - 15) * ((100vw - 320px) / (1200 - 320)));
+            line-height: 32px;
+            color: #FFFFFF;
+            padding-left: 83px;
+            padding-top: 18px;
+        }
+    }
+}

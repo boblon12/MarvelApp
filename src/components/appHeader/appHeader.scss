@@ -1,0 +1,30 @@
+@import '../../style/variables.scss';
+
+.app {
+    &__header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    &__title {
+        font-weight: bold;
+        font-size: calc(20px + (40 - 20) * ((100vw - 320px) / (1200 - 320)));
+        span {
+            color: $main-color;
+        }
+    }
+    &__menu {
+        ul {
+            display: flex;
+            justify-content: space-between;
+            font-weight: bold;
+            font-size: calc(20px + (40 - 20) * ((100vw - 320px) / (1200 - 320)));
+            li {
+                margin: 0 8px;
+                a:hover {
+                    color: $main-color;
+                }
+            }
+        }
+    }
+}

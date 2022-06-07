@@ -1,0 +1,24 @@
+//`Адаптивное сво-во
+
+//ширина полотна из фигнмы скажем
+
+
+@mixin adaptive-value($Property, $StartSize, $MinSize, $Type) {
+    $width: 1900px;
+    $MaxWidthContainer: 1200px;
+    $addSize: $StartSize - $MinSize;
+
+    @if $Type==1 {
+        //Адаптив если весь контент сайта внутри контейнера
+        #{$Property}: $StartSize + px;
+
+        @media (max-width: #{$MaxWidthContainer + px}) {
+            #{$Property}: calc(#{$MinSize + px} + #{$addSize} * ((100vw - 320px) / #{$MaxWidthContainer}));
+        }
+    }
+
+    //всегда в других случаях (не для конктейнера)
+    @else {
+        #{$Property}: calc(#{$MinSize + px} + #{$addSize} * ((100vw - 320px) / #{$width}));
+    }
+}
