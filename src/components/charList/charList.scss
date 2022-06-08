@@ -52,6 +52,11 @@
         box-shadow: 5px 5px 10px rgba(0, 0, 0, .25);
         cursor: pointer;
         transition: 0.3s transform;
+        &_selected {
+            transition: all 0.5s ease-out;
+            box-shadow: 0 5px 20px $main-color;
+            transform: translateY(-10px);
+        }
 
         @media (max-width: 1200px) {
             & {
@@ -73,11 +78,7 @@
         //     box-shadow: 0 5px 20px $main-color;
         //     transform: translateY(-8px);
         // }
-        &:hover {
-            transition: all 0.5s ease-out;
-            box-shadow: 0 5px 20px $main-color;
-            transform: translateY(-10px);
-        }
+      
     }
 
     &__name {
@@ -89,4 +90,10 @@
         text-transform: uppercase;
         color: #fff;
     }
+}
+
+.spinner {
+    margin-top: 40px;
+    display: flex;
+    justify-content: center;
 }

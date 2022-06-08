@@ -1,19 +1,24 @@
 @import '../../style/variables.scss';
 .app {
     &__banner {
+        align-content: center;
         width: 100%;
         background-color: $dark;
         height: calc(50px + (100 - 50) * ((100vw - 320px) / (1200 - 320)));
         padding: 0 25px 0 45px;
-        display: grid;
-        grid-template-columns: 152px auto 133px;
+        display: flex;
+        justify-content: space-between;
+        
         &-text {
+           
+            align-items: center;
+            text-align: center;
             font-weight: bold;
-            font-size: calc(15px + (24 - 15) * ((100vw - 320px) / (1200 - 320)));
-            line-height: 32px;
+            font-size: calc(10px + (24 - 10) * ((100vw - 320px) / (1200 - 320)));
+            line-height: calc(20px + (32 - 20) * ((100vw - 320px) / (1200 - 320)));
             color: #FFFFFF;
-            padding-left: 83px;
-            padding-top: 18px;
+            padding-top: calc(7px + (15 - 7) * ((100vw - 320px) / (1200 - 320)));;
+          
         }
     }
 }
