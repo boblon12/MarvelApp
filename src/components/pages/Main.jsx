@@ -5,6 +5,8 @@ import decoration from '../../resources/img/vision.png';
 import RandomChar from '../randomChar/RandomChar'
 import CharInfoContainer from '../charInfo/CharInfoContainer'
 import CharModalInfoModal from '../modalCharInfo/Modal/CharModal/CharInfoModal';
+import FindCharContainer from '../findChar/FindCharContainer';
+import FindCharContainerTop from '../findCharTop/FindCharContainerTop';
 
 function Main() {
 
@@ -27,9 +29,14 @@ function Main() {
             </MyModal>
             <main>
                 <RandomChar />
+                <FindCharContainerTop/>
                 <div className="char__content">
                     <CharListContainer setVisibleClick={setVisibleClick} onCharSelected={onCharSelected}/>
-                    <CharInfoContainer  charId={selectedChar}/>
+                    <div className='char__content-left'>
+                        <CharInfoContainer  charId={selectedChar}/>
+                        <FindCharContainer/>
+                    </div>
+                    
                 </div>
                 <img className="bg-decoration" src={decoration} alt="vision" />
             </main>
