@@ -1,6 +1,6 @@
 .comics {
     &__list {
-        margin-top: 45px;
+        margin-top: calc(15px + (45 - 15) * ((100vw - 320px) / (1600 - 320)));
     }
     &__flex {
         display: flex;
