@@ -19,15 +19,20 @@ const App = () => {
     return (
         <div className="app">
             <AppHeader />
+
             <Suspense fallback={<Loader />}>
                 <Routes>
                     <Route element={<Main />} path="/" />
                     <Route element={<Page404 />} path="/*" />
                     <Route element={<Comics />} exact path="/comics" />
-                     <Route path="/comics/:id" element={<SinglePage />}>
+                    <Route path="/comics/:id" element={<SinglePage type={'comics'} />}>
+                    </Route>
+                    <Route exact path="/characters" />
+                    <Route path="/characters/:id" element={<SinglePage type={'charater'} />}>
                     </Route>
                 </Routes>
             </Suspense>
+
         </div>
     )
 }

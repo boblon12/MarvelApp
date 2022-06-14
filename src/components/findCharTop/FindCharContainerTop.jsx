@@ -1,24 +1,68 @@
-import React from 'react'
-import './FindCharTop.scss'
+import React, { useState} from 'react';
+import './FindCharTop.scss';
+import { useForm } from "react-hook-form";
+import { yupResolver } from '@hookform/resolvers/yup';
+import * as yup from "yup";
+import useMarvelService from '../API/service';
+import Loader from '../Tools/Loader/Loader';
+import { Link } from 'react-router-dom';
 
-function FindCharContainerTop() {
+
+const schema = yup.object({
+    name: yup.string().required().min(3, 'Must be min 3 letters'),
+}).required();
+
+
+
+
+
+function FindCharContainer() {
+
+    const [char, setChar] = useState('');
+    const { loading, error, getCharacterByName, clearError } = useMarvelService();
+    const { register, handleSubmit, formState: { errors } } = useForm({
+        resolver: yupResolver(schema)
+    });
+
+    const onSubmit = async (data) => {
+        clearError()
+        const response = await getCharacterByName(data.name);
+        setChar(response)
+    }
+
+    const spinner = loading ? <Loader /> : null;
+    const errorMes = errors ? <h2 style={{ 'color': '#9F0013' }}>{errors.name?.message}</h2> : null;
+    const content = !char ? null : char.length > 0 ?
+        <h2 style={{ 'color': 'green' }} >Found it! {char[0].name}</h2>
+        :
+        <h2 style={{ 'color': '#9F0013' }} >Character not found</h2>
+
+
     return (
         <div className='char__find__top'>
-            <div className="char__find__top__inputs">
-                <input type="text" name="" id="" placeholder='Enter character' />
-                <h2>Something went wrong...</h2>
-            </div>
-            <div className="char__find__top__buttons">
-                <a href="#" className="button button__main">
-                    <div className="inner">FIND</div>
-                </a>
-                <a href="#" className="button button__secondary">
-                    <div className="inner">Look</div>
-                </a>
-            </div>
+            {spinner ? spinner : 
+            <>
+                <form className="char__find__top__inputs" onSubmit={handleSubmit(onSubmit)}>
+                    <input  {...register("name", { required: true })} type="text" placeholder='Enter character' />
+                    {errorMes}
+                    <input className='input' type="submit" />
+                </form>
+                <div className="char__find__top__inputs">
+                    {content}
+                    {char.length > 0 ? 
+                    <Link to={`/characters/${char[0].id}`}>
+                        <input style={{ 'backgroundColor': '#5C5C5C' }} className='input' type="submit" value={char[0].name} />
+                    </Link>
+                    :
+                    <input style={{ 'backgroundColor': '#5C5C5C' }} className='input' type="submit" value='Просто кнопка' />
+                    }  
+                </div>
+            </>
+            }
 
         </div>
+
     )
 }
 
-export default FindCharContainerTop
+export default FindCharContainer

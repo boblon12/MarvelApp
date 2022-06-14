@@ -11,7 +11,6 @@ const ComicsList = () => {
     const [newItemLoading, setnewItemLoading] = useState(false);
     const [Offset, setOffset] = useState(0);
     const [comicsEnded, setComicsEnded] = useState(false);
-
     const {loading, error, getAllComics, clearError} = useMarvelService();
 
     useEffect(() => {
@@ -19,14 +18,13 @@ const ComicsList = () => {
     }, [])
 
     const onRequest = async (Offset, initial) => {
-        let ended = false;
+        setComicsEnded(false);
         initial ? setnewItemLoading(false) : setnewItemLoading(true);
         clearError();
         const response = await getAllComics(Offset);
         if (response.length < 8) {
-            ended = true;
+            setComicsEnded(true);
         }
-        setComicsEnded(ended)
         setComicsList(comicsList => [...comicsList, ...response]); 
         setOffset(Offset=> Offset + 9) 
         setnewItemLoading(newItemLoading => false);
@@ -62,8 +60,8 @@ const ComicsList = () => {
     return (
         <div className="comics__list">
             {errorMessage}
-            <div className='spinner'>{spinner} </div>
             {items}
+            <div className='spinner'>{spinner} </div>
             {comicsEnded ? 'Комиксы закончились' : 
             <button 
                 disabled={newItemLoading}

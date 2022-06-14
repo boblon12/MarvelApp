@@ -8,6 +8,15 @@
         padding: 0 25px 0 45px;
         display: flex;
         justify-content: space-between;
+
+        @media (max-width: 472px) {
+            & {
+                height: 80px;
+                padding: 0px;
+                padding-top: 10px;
+            }
+        }
+      
         
         &-text {
            
