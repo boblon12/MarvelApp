@@ -6,6 +6,8 @@
         z-index: 200;
         background-color: #fff;
         width: calc(300px + (500 - 300) * ((100vw - 320px) / (1600 - 320)));
+        overflow-y: scroll;
+        scroll-behavior: smooth;
         &-name {
             display: flex;
             font-weight: bold;

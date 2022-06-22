@@ -1,0 +1,84 @@
+// Colors
+$greenSeaweed: rgba(2, 128, 144, 1);
+$blueQueen: rgba(69, 105, 144, 1);
+$redFire: rgb(124, 122, 122);
+
+// Fonts
+
+
+body {
+    background-color: white;
+
+}
+
+.login {
+
+	
+    overflow: hidden;
+    background-color: white;
+    padding: 40px 30px 30px 30px;
+    border-radius: 10px;
+    position: relative;
+	margin: 30px auto;
+	border: 1px solid #eb021d;
+    width: 400px;
+
+    box-shadow: 5px 10px 10px rgba(#9F0013, 0.5);
+
+    &::before,
+    &::after {
+        content: '';
+        position: absolute;
+        width: 600px;
+        height: 600px;
+        border-top-left-radius: 40%;
+        border-top-right-radius: 45%;
+        border-bottom-left-radius: 35%;
+        border-bottom-right-radius: 40%;
+        z-index: -1;
+    }
+
+    &::before {
+        left: 40%;
+        bottom: -130%;
+        background-color: rgba($blueQueen, 0.15);
+
+    }
+
+    &::after {
+        left: 35%;
+        bottom: -125%;
+        background-color: rgba($greenSeaweed, 0.2);
+
+    }
+
+    >input {
+        display: block;
+        border-radius: 5px;
+        font-size: 16px;
+        background: white;
+        width: 100%;
+        border: 0;
+        padding: 10px 10px;
+        margin: 15px -10px;
+    }
+
+    >.login_button {
+        cursor: pointer;
+        color: #fff;
+        font-size: 16px;
+        text-transform: uppercase;
+        width: 80px;
+        border: 0;
+        padding: 10px 0;
+        margin-top: 10px;
+        margin-left: -5px;
+        border-radius: 5px;
+        background-color: $redFire;
+
+
+        &:hover {
+            background-color: darken($redFire, 5%);
+        }
+    }
+}

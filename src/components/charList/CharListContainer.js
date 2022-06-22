@@ -1,32 +1,37 @@
 import './charList.scss';
-import useMarvelService from '../API/service';
+
 import { useRef, useState, useEffect } from 'react';
 import ErrorMessage from '../Tools/Error/ErrorMessage';
 import Loader from '../Tools/Loader/Loader';
 import PropTypes from 'prop-types';
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchHeroes, unsetHeroes } from './CharListSlice';
+
 
 
 const CharListContainer = (props) => {
 
-   
+    const heroes = useSelector(state => state.heroes.heroes);
+    const condition = useSelector(state => state.heroes);
+    const dispatch = useDispatch();
     const screenWidth = window.screen.width
-    const [CharList, setCharList] = useState([]);
     const [Offset, setOffset] = useState(209);
-    const {loading, error, getAllCharacters, clearError} = useMarvelService();
     const itemRefs = useRef([]);
-    const [newItemLoading, setNewItemLoading] = useState(false)
-
+    const [newItemLoading, setNewItemLoading] = useState(false);
+ 
     useEffect(() => {
-        loadNewCharacters(Offset, true);
+        dispatch(fetchHeroes(Offset));
+
+        return () => {
+            dispatch(unsetHeroes());
+        }
     }, [])
 
-    const loadNewCharacters =  async(Offset, initial) => {
-        initial ? setNewItemLoading(false) : setNewItemLoading(true);
-        clearError();
-        const response = await  getAllCharacters(Offset)
-        setCharList(CharList => [...CharList, ...response]); 
+    const loadNewCharacters = (Offset, initial=true) => {
         setOffset(Offset=> Offset + 9) 
-        setNewItemLoading(newItemLoading => false) 
+        initial ? setNewItemLoading(true) : setNewItemLoading(false);
+        dispatch(fetchHeroes(Offset))
+        setNewItemLoading(false) 
     }
 
     const focusOnItem = (id) => {
@@ -37,8 +42,8 @@ const CharListContainer = (props) => {
     }
 
 
-    const errorMessage = error ? <ErrorMessage/> : null;
-    const spinner = loading ? <Loader/> : null;
+    const errorMessage = condition.error ? <ErrorMessage/> : null;
+    const spinner = condition.loading ? <Loader/> : null;
 
 
     function renderItems(arr) {
@@ -72,7 +77,7 @@ const CharListContainer = (props) => {
         )
     }
     
-    const items = renderItems(CharList);
+    const items = renderItems(heroes);
 
     return (
         <div className="char__list">
